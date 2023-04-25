@@ -1,2 +1,2 @@
-# Image-Recognition-using-AWS
-Build an Image recognition application using AWS.
+# Image-Classification-using-AWS
+Build an Image Classification system using AWS.
