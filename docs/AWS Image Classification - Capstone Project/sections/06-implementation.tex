@@ -24,17 +24,5 @@ App-tier EC2 instances were created following the instructions \citet{ec2} provi
 \end{enumerate}
 
 
-% The implementation consists of multiple code modules. The front-end of the application allows users to choose and upload images, it was designed using HTML and CSS. The html module contains a template for the front-end of the application, allowing users to choose and upload images. The main module retrieves the input images from the HTML template, sends them as parameters to upload file and send message methods, and receives the output by calling from s3 bucket. The \texttt{upload\_file}.py module contains various methods for uploading and downloading files, sending messages to the input SQS queue, and getting file output from the S3 output bucket. The controller.py module contains methods for creating and starting EC2 instances and implementing scaling logic. Finally, the worker.py module includes various methods for receiving, sending, and deleting messages, stopping and terminating instances, uploading files to the output bucket, and downloading the output received from the deep learning model.
-
-% The implementation includes setting up a web-tier EC2 instance and an app-tier EC2 instance, with the latter containing the worker.py script. Flask libraries are used to implement the front-end of the application, and boto3 libraries are used to establish connections between the front-end and instances. The app-tier instance is created in aws console, it is a t2.small type instance mentioned, and the scripts are running automatically using a cron tab for worker file, this job basically runs every minute in ec2 instance.
-% \begin{verbatim}
-%  */5 * * * * python3 /home/ubuntu/worker.py > ./result.txt
-%  \end{verbatim}
-% The scaling in and scaling out of instances are performed based on the number of input images uploaded, with the input images fed to the SQS queue, and the number of messages calculated. Scaling in is performed at the controller, with instances automatically terminated when there are no more messages left in the input SQS. The scaling out logic is implemented using the number of running instances and the approximate number of visible SQS messages. Instances are created with the AMI, and the scaling out logic is designed not to create instances more than 15. If the number of SQS messages is less than 15, the number of instances to be created equals the number of messages minus the number of already running instances. If the SQS messages are more than 15, the number of instances to be created equals 15 minus the number of already running instances.
-
-% In this architecture, a pretrained ResNet model with ImageNet labels from the Keras library is used for image classification. The ResNet model is a deep convolutional neural network that has been pre-trained on the ImageNet dataset, which contains over a million labeled images. The Keras library provides a simple way to use this model for image classification tasks. By leveraging the pre-trained model, the architecture can quickly and accurately classify images without the need for extensive training on a custom dataset.
-
-
-
 \end{document}
 \clearpage
