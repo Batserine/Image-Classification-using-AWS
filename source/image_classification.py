@@ -27,9 +27,3 @@ print(decoded_preds[0][1])
 f = open("/home/ubuntu/classifier/output.txt","a")
 print(path+" "+decoded_preds[0][1],file=f)
 os.remove(path)
-
-# Observations:
-
-# For 20 images uploaded - 230.15 seconds response time, 30 images - 215.67 seconds.
-# Unable to upload, 60 images, faced memory error. Also, unable to upload 40 images, faced looping after 26th image so need to check the maximum number of images that can be uploaded.
-# Average boot time for 1 instance (not considering a delay of 30 seconds) - 71.36 seconds, 71.17 seconds, 101.26 seconds, -- 106.14 seconds, 76.10 seconds, 76.20 seconds, 60.90 seconds, 76.01 seconds, 75.92 seconds, 76.27 seconds, 76.06 seconds, 61.76 seconds, 60.86 seconds
