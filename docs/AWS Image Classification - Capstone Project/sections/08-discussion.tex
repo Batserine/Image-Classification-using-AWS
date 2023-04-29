@@ -1,0 +1,23 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\part*{Conclusion}
+
+The image classification application implemented in this project using AWS as an IaaS provider was successful in providing users with a platform to upload images for classification. The use of AWS services such as EC2, SQS, and S3, along with Python for the backend, allowed for the scaling of resources based on user demand, providing a cost-effective and scalable infrastructure for image classification applications.
+
+Auto-scaling was implemented as a key feature of the infrastructure, which proved to be useful for applications with unpredictable usage patterns. The project demonstrated the importance of a scalable infrastructure in the field of image classification, which has various applications across industries such as medical diagnosis, agriculture, retail, security, environmental monitoring, and manufacturing.
+
+The evaluation of the image classification system was based on the metrics of response time, boot time and accuracy. The response time for medium-sized images was found to be acceptable, with an average of 215.67 seconds for 30 images. However, the lower-sized images took a longer time to upload, with an average of approximately 600 seconds for 27 images. Additionally, lower-sized images did not get accurate classification results. Some issues were faced while uploading a large number of images, such as memory errors while uploading 60 images and looping after the 26th image while uploading 40 images. Investigation is needed to determine the maximum number of images that can be uploaded at a time. The average boot time for the App-Tier instance (excluding the delay of 30 seconds) was found to be 71.53 seconds based on the results from multiple test runs.
+
+Overall, this project demonstrated the successful implementation of an image classification application using AWS, and provided valuable insights into the architecture and infrastructure required for such applications. The scalability and cost-effectiveness of the infrastructure make it a suitable choice for various image classification applications across different industries.
+
+% In conclusion, the project successfully implemented an image classification application using Amazon Web Services (AWS) as an Infrastructure as a Service (IaaS) provider. The application allowed users to upload images to be classified and returned predicted outputs using a pre-trained image classification model through the AWS resources. 
+
+% The project involved designing and implementing RESTful web services, scaling in and scaling out EC2 instances at the application tier based on user demand. AWS services such as EC2, SQS, and S3 were used in the implementation, along with Python for the backend of the architecture.
+
+% Image classification has various applications across different industries, including medical diagnosis, agriculture, retail, security, environmental monitoring, and manufacturing. The use of IaaS providers like AWS enables scalable and cost-ffective infrastructure for such applications.
+
+% Auto-scaling was implemented as a key feature of the infrastructure to adjust computing resources based on user demand. This feature is particularly useful for applications with unpredictable usage patterns, allowing the system to automatically adjust to changing needs without manual intervention.
+
+% Overall, the project successfully demonstrated the implementation of an image classification application using AWS and provided insights into the architecture and infrastructure needed for such applications.
+\end{document}
+\clearpage

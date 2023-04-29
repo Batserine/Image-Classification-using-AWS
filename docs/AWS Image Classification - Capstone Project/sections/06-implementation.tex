@@ -1,0 +1,40 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\part*{Implementation}
+The following is a detailed description of the implementation steps involved in building a web application with image classification capabilities on AWS using a two-tier architecture with a Web-tier and App-tier.
+\subsection*{Setup}
+
+\subsubsection*{Web-tier:}
+To implement the front-end part of the application, we utilized HTML and CSS to design a visually appealing static web page, with HTML providing the structural framework and CSS enabling customization of the layout, font, and color schemes. We integrated the Flask framework to manage communication between the front-end and back-end components, with essential tools and libraries provided to handle various user requests. Using the boto3 libraries, we established a seamless connection between the front-end and App-tier EC2 instance, allowing us to interact with the instance and upload images to the input S3 bucket for processing by the image classification model. Our approach was effective in creating a user-friendly interface while ensuring seamless integration with the App-tier EC2 instance.
+
+\subsubsection*{App-tier EC2 instances:}
+App-tier EC2 instances were created following the instructions \citet{ec2} provided by AWS to create an AMI with a t2.small instance type and a root key attached. The default location was set to us-east-1 and the results were stored in JSON format. On the App-tier instances, we installed the necessary libraries listed in "requirements.txt" and added "worker.py" and "image classification.py", which contains a pre-trained ResNet model with ImageNet labels from the Keras library used for image classification. The model has been pre-trained on the ImageNet dataset, which includes over a million labeled images, making it a powerful tool for quickly and accurately classifying images without extensive training on a custom dataset. To run the scripts automatically every minute, we used cron tab and executed the command \texttt{* * * * * python3 /home/ubuntu/worker.py > ./result.txt}.
+
+\subsection*{Execution Steps}
+
+\begin{enumerate}
+% \item We used flask libraries to implement the front-end part of the application and boto3 libraries to establish the connection between the front-end and instances.
+\item First, we started the Web-tier application manually on the terminal using the command \texttt{python3 app2.py}, which started the Web-tier.
+\item Next, the controller is started on the terminal using the command\\ \verb|python3 controller.py|. The script retrieves information about an SQS queue, counts the number of running instances, and starts new instances if necessary. It is designed to be run continuously in a loop as a background process on a local machine.
+\item As the local IP address is static and does not change over time, we associated the Web-tier with it. Then, the images are uploaded using the upload button.
+\item The required number of instances started running depending on the input number of images.
+\item These instances can be on the EC2 dashboard, images were uploaded to the input S3 bucket, and the classification results were uploaded to the output S3 bucket via message passing through SQS.
+\item Finally, the results were forwarded to the frontend webpage in key-value pair from SQS and S3 respectively in the format: \verb|image.jpeg, image_label|.
+% \item The input bucket name is "aws-input-cap", and the output bucket name is "aws-output-cap".
+\end{enumerate}
+
+
+% The implementation consists of multiple code modules. The front-end of the application allows users to choose and upload images, it was designed using HTML and CSS. The html module contains a template for the front-end of the application, allowing users to choose and upload images. The main module retrieves the input images from the HTML template, sends them as parameters to upload file and send message methods, and receives the output by calling from s3 bucket. The \texttt{upload\_file}.py module contains various methods for uploading and downloading files, sending messages to the input SQS queue, and getting file output from the S3 output bucket. The controller.py module contains methods for creating and starting EC2 instances and implementing scaling logic. Finally, the worker.py module includes various methods for receiving, sending, and deleting messages, stopping and terminating instances, uploading files to the output bucket, and downloading the output received from the deep learning model.
+
+% The implementation includes setting up a web-tier EC2 instance and an app-tier EC2 instance, with the latter containing the worker.py script. Flask libraries are used to implement the front-end of the application, and boto3 libraries are used to establish connections between the front-end and instances. The app-tier instance is created in aws console, it is a t2.small type instance mentioned, and the scripts are running automatically using a cron tab for worker file, this job basically runs every minute in ec2 instance.
+% \begin{verbatim}
+%  */5 * * * * python3 /home/ubuntu/worker.py > ./result.txt
+%  \end{verbatim}
+% The scaling in and scaling out of instances are performed based on the number of input images uploaded, with the input images fed to the SQS queue, and the number of messages calculated. Scaling in is performed at the controller, with instances automatically terminated when there are no more messages left in the input SQS. The scaling out logic is implemented using the number of running instances and the approximate number of visible SQS messages. Instances are created with the AMI, and the scaling out logic is designed not to create instances more than 15. If the number of SQS messages is less than 15, the number of instances to be created equals the number of messages minus the number of already running instances. If the SQS messages are more than 15, the number of instances to be created equals 15 minus the number of already running instances.
+
+% In this architecture, a pretrained ResNet model with ImageNet labels from the Keras library is used for image classification. The ResNet model is a deep convolutional neural network that has been pre-trained on the ImageNet dataset, which contains over a million labeled images. The Keras library provides a simple way to use this model for image classification tasks. By leveraging the pre-trained model, the architecture can quickly and accurately classify images without the need for extensive training on a custom dataset.
+
+
+
+\end{document}
+\clearpage
