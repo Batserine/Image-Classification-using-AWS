@@ -3,7 +3,7 @@ This project involves the implementation of an image classification application 
 
 # Directory Structure
 - `docs`: contains the final documentation of the project.
-- `ppt`: contains all the presentation files, including the final presentation.
+- `Presentations`: contains all the presentation files, including the final presentation.
 - `source`: contains the project source code.
 
 # Metrics Evaluation
