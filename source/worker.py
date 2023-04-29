@@ -16,7 +16,7 @@ region = 'us-east-1'
 
 BUCKET_NAME='aws-input-cap'
 OUTPUT_BUCKET = 'aws-output-cap'
-RESULT = 'result.txt'
+RESULT = 'result.txt' # temp storage
 
 def number_of_messages_in_Queue(name="aws-capstone-input-queue"):
     sqs = boto3.resource('sqs', region_name = region)
@@ -56,7 +56,6 @@ def receive_message():
         print('Received message: %s' %filename)
     except Exception as e:
         print("Error receiving message:", e)
-        # return None, None
         # stop_instances()
         # exit(0)
     return filename, message, receipt_handle, message_body
@@ -122,7 +121,7 @@ def download_message(key):
 def stop_instances():
     instance_id = subprocess.check_output(["ec2metadata", "--instance-id"], universal_newlines=True).strip()
     print(instance_id)
-    current_instance_id = "" #write static instance id here for debugging
+    current_instance_id = "" # write static instance id here for debugging
     print("current instance is:", current_instance_id)
     ec2 = boto3.resource('ec2')
     instances = ec2.instances.filter(Filters=[{'Name': 'instance-state-name', 'Values': ['running']}])
@@ -138,8 +137,8 @@ def stop_instances():
         print("No instances to stop")
 
 def terminate_instances():
-    # instance_id = subprocess.check_output(["ec2metadata", "--instance-id"], universal_newlines=True).strip()
-    instance_id = ""  #write static instance id here for debugging
+    instance_id = subprocess.check_output(["ec2metadata", "--instance-id"], universal_newlines=True).strip()
+    instance_id = ""  # write static instance id here for debugging
     print("Current instance ID is:", instance_id)
     ec2 = boto3.resource('ec2')
     instances = ec2.instances.filter(Filters=[{'Name': 'instance-state-name', 'Values': ['running']}])
