@@ -1,0 +1,22 @@
+# Requirements for web-tier
+flask
+boto3
+werkzeug
+
+# Steps in App-Tier Ec2 instance:
+
+# DO sudo apt-get update
+# DO sudo apt-get install python3-pip
+# DO sudo pip install -r requirements.txt
+# sudo apt install awscli
+# aws configure -> add credentials, region, output format in json.
+# Download root key when creating aws key pair.
+# AWS key: xxx
+# AWS secret key: xxx
+# crontab -e
+#  * * * * * python3 /home/ubuntu/worker.py > ./result.txt
+
+# Requirements for app-tier
+# pillow
+# boto3
+# tensorflow
