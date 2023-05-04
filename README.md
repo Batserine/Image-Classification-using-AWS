@@ -12,3 +12,5 @@ In order to evaluate the performance of the system, we measured the response tim
 - An investigation is needed to determine the maximum number of images that can be uploaded at a time.
 
 Overall, the project successfully demonstrated the implementation of an image classification application using AWS and provided insights into the architecture and infrastructure needed for such applications.
+
+**Note:** The documentation is available in open source repository: [https://arxiv.org/abs/2305.01634](https://arxiv.org/abs/2305.01634)
